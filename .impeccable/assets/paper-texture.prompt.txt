@@ -1,0 +1,12 @@
+Origin: sourced texture, not AI generated.
+Asset: Paper001 color map by ambientCG.com / Lennart Demes.
+Source asset page: https://ambientcg.com/a/Paper001
+Official metadata API: https://ambientcg.com/api/v2/full_json?id=Paper001&include=downloadData,previewData,imageData
+Downloaded image: https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Paper001/Paper001_SQ_Color.jpg?55447
+License: Creative Commons CC0 1.0 Universal Public Domain Dedication (CC0-1.0).
+Primary license page: https://docs.ambientcg.com/license/
+License deed: https://creativecommons.org/publicdomain/zero/1.0/
+Retrieved: 2026-10-28.
+Conversion: ffmpeg; resized proportionally to 1024 pixels wide and encoded as WebP at quality 85. No creative image edit.
+Intended use: subtle repeating paper fiber material underneath semantic sticky-note UI and CSS daylight shadows.
+Shipping asset: web/public/images/paper-texture.webp

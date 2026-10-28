@@ -1,0 +1,10 @@
+Paper texture: Paper001
+Creator: ambientCG.com / Lennart Demes
+Source: https://ambientcg.com/a/Paper001
+Direct source: https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Paper001/Paper001_SQ_Color.jpg?55447
+License: Creative Commons CC0 1.0 Universal Public Domain Dedication (CC0-1.0)
+License information: https://docs.ambientcg.com/license/
+Legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Retrieved: 2026-10-28
+
+Converted from the ambientCG flat color preview to a 1024-pixel-wide WebP for the Stickywall interface. No attribution is required under CC0. Credit is recorded here to preserve the asset's origin.

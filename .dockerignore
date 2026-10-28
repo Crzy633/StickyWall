@@ -1,0 +1,10 @@
+.git
+.agents
+.impeccable
+.local
+.env
+**/node_modules
+web/dist
+server/stickywall*
+*.log
+*.tsbuildinfo

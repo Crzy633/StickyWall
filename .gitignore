@@ -1,0 +1,14 @@
+node_modules/
+web/dist/
+web/.vite/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.local/
+server/stickywall
+server/stickywall.exe
+*.log
+.DS_Store
+.impeccable/review/
+.impeccable/font.css

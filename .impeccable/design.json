@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T08:18:21.875410+00:00",
+  "title": "Design System: 日光留言墙",
+  "extensions": {
+    "colorMeta": {
+      "wall": {
+        "role": "neutral",
+        "displayName": "暖米色墙面",
+        "tonalRamp": [
+          "oklch(15% 0.0065 90.55)",
+          "oklch(25% 0.0108 90.55)",
+          "oklch(35% 0.0151 90.55)",
+          "oklch(45% 0.0194 90.55)",
+          "oklch(58% 0.0194 90.55)",
+          "oklch(70% 0.0194 90.55)",
+          "oklch(83% 0.0132 90.55)",
+          "oklch(95% 0.0039 90.55)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "橄榄棕墨",
+        "tonalRamp": [
+          "oklch(15% 0.0073 121.28)",
+          "oklch(25% 0.0121 121.28)",
+          "oklch(35% 0.0169 121.28)",
+          "oklch(45% 0.0218 121.28)",
+          "oklch(58% 0.0218 121.28)",
+          "oklch(70% 0.0218 121.28)",
+          "oklch(83% 0.0148 121.28)",
+          "oklch(95% 0.0044 121.28)"
+        ]
+      },
+      "muted-ink": {
+        "role": "neutral",
+        "displayName": "灰橄榄辅助墨",
+        "tonalRamp": [
+          "oklch(15% 0.0110 120.56)",
+          "oklch(25% 0.0184 120.56)",
+          "oklch(35% 0.0257 120.56)",
+          "oklch(45% 0.0331 120.56)",
+          "oklch(58% 0.0331 120.56)",
+          "oklch(70% 0.0331 120.56)",
+          "oklch(83% 0.0225 120.56)",
+          "oklch(95% 0.0066 120.56)"
+        ]
+      },
+      "button-sun": {
+        "role": "primary",
+        "displayName": "暖阳按钮",
+        "tonalRamp": [
+          "oklch(15% 0.0378 83.38)",
+          "oklch(25% 0.0630 83.38)",
+          "oklch(35% 0.0882 83.38)",
+          "oklch(45% 0.1134 83.38)",
+          "oklch(58% 0.1134 83.38)",
+          "oklch(70% 0.1134 83.38)",
+          "oklch(83% 0.0771 83.38)",
+          "oklch(95% 0.0227 83.38)"
+        ]
+      },
+      "button-sun-hover": {
+        "role": "primary",
+        "displayName": "暖阳按钮悬停",
+        "tonalRamp": [
+          "oklch(15% 0.0432 83.99)",
+          "oklch(25% 0.0720 83.99)",
+          "oklch(35% 0.1008 83.99)",
+          "oklch(45% 0.1296 83.99)",
+          "oklch(58% 0.1296 83.99)",
+          "oklch(70% 0.1296 83.99)",
+          "oklch(83% 0.0881 83.99)",
+          "oklch(95% 0.0259 83.99)"
+        ]
+      },
+      "button-ink": {
+        "role": "neutral",
+        "displayName": "深麦按钮墨",
+        "tonalRamp": [
+          "oklch(15% 0.0178 80.60)",
+          "oklch(25% 0.0297 80.60)",
+          "oklch(35% 0.0416 80.60)",
+          "oklch(45% 0.0534 80.60)",
+          "oklch(58% 0.0534 80.60)",
+          "oklch(70% 0.0534 80.60)",
+          "oklch(83% 0.0363 80.60)",
+          "oklch(95% 0.0107 80.60)"
+        ]
+      },
+      "publish": {
+        "role": "primary",
+        "displayName": "苔绿行动",
+        "tonalRamp": [
+          "oklch(15% 0.0168 124.81)",
+          "oklch(25% 0.0280 124.81)",
+          "oklch(35% 0.0391 124.81)",
+          "oklch(45% 0.0503 124.81)",
+          "oklch(58% 0.0503 124.81)",
+          "oklch(70% 0.0503 124.81)",
+          "oklch(83% 0.0342 124.81)",
+          "oklch(95% 0.0101 124.81)"
+        ]
+      },
+      "publish-hover": {
+        "role": "primary",
+        "displayName": "苔绿行动悬停",
+        "tonalRamp": [
+          "oklch(15% 0.0179 127.07)",
+          "oklch(25% 0.0299 127.07)",
+          "oklch(35% 0.0418 127.07)",
+          "oklch(45% 0.0537 127.07)",
+          "oklch(58% 0.0537 127.07)",
+          "oklch(70% 0.0537 127.07)",
+          "oklch(83% 0.0365 127.07)",
+          "oklch(95% 0.0107 127.07)"
+        ]
+      },
+      "publish-ink": {
+        "role": "neutral",
+        "displayName": "浅米行动墨",
+        "tonalRamp": [
+          "oklch(15% 0.0048 102.45)",
+          "oklch(25% 0.0080 102.45)",
+          "oklch(35% 0.0112 102.45)",
+          "oklch(45% 0.0145 102.45)",
+          "oklch(58% 0.0145 102.45)",
+          "oklch(70% 0.0145 102.45)",
+          "oklch(83% 0.0098 102.45)",
+          "oklch(95% 0.0029 102.45)"
+        ]
+      },
+      "paper-yellow": {
+        "role": "secondary",
+        "displayName": "麦芽黄纸",
+        "tonalRamp": [
+          "oklch(15% 0.0249 95.94)",
+          "oklch(25% 0.0415 95.94)",
+          "oklch(35% 0.0581 95.94)",
+          "oklch(45% 0.0747 95.94)",
+          "oklch(58% 0.0747 95.94)",
+          "oklch(70% 0.0747 95.94)",
+          "oklch(83% 0.0508 95.94)",
+          "oklch(95% 0.0149 95.94)"
+        ]
+      },
+      "paper-green": {
+        "role": "secondary",
+        "displayName": "嫩叶绿纸",
+        "tonalRamp": [
+          "oklch(15% 0.0096 122.00)",
+          "oklch(25% 0.0161 122.00)",
+          "oklch(35% 0.0225 122.00)",
+          "oklch(45% 0.0289 122.00)",
+          "oklch(58% 0.0289 122.00)",
+          "oklch(70% 0.0289 122.00)",
+          "oklch(83% 0.0197 122.00)",
+          "oklch(95% 0.0058 122.00)"
+        ]
+      },
+      "paper-pink": {
+        "role": "secondary",
+        "displayName": "浅陶粉纸",
+        "tonalRamp": [
+          "oklch(15% 0.0082 36.51)",
+          "oklch(25% 0.0137 36.51)",
+          "oklch(35% 0.0192 36.51)",
+          "oklch(45% 0.0247 36.51)",
+          "oklch(58% 0.0247 36.51)",
+          "oklch(70% 0.0247 36.51)",
+          "oklch(83% 0.0168 36.51)",
+          "oklch(95% 0.0049 36.51)"
+        ]
+      },
+      "paper-blue": {
+        "role": "secondary",
+        "displayName": "雾水蓝纸",
+        "tonalRamp": [
+          "oklch(15% 0.0046 196.92)",
+          "oklch(25% 0.0077 196.92)",
+          "oklch(35% 0.0108 196.92)",
+          "oklch(45% 0.0139 196.92)",
+          "oklch(58% 0.0139 196.92)",
+          "oklch(70% 0.0139 196.92)",
+          "oklch(83% 0.0094 196.92)",
+          "oklch(95% 0.0028 196.92)"
+        ]
+      },
+      "yellow-ink": {
+        "role": "neutral",
+        "displayName": "麦芽黄纸墨",
+        "tonalRamp": [
+          "oklch(15% 0.0226 89.47)",
+          "oklch(25% 0.0376 89.47)",
+          "oklch(35% 0.0527 89.47)",
+          "oklch(45% 0.0677 89.47)",
+          "oklch(58% 0.0677 89.47)",
+          "oklch(70% 0.0677 89.47)",
+          "oklch(83% 0.0461 89.47)",
+          "oklch(95% 0.0135 89.47)"
+        ]
+      },
+      "green-ink": {
+        "role": "neutral",
+        "displayName": "嫩叶绿纸墨",
+        "tonalRamp": [
+          "oklch(15% 0.0160 129.03)",
+          "oklch(25% 0.0267 129.03)",
+          "oklch(35% 0.0374 129.03)",
+          "oklch(45% 0.0480 129.03)",
+          "oklch(58% 0.0480 129.03)",
+          "oklch(70% 0.0480 129.03)",
+          "oklch(83% 0.0327 129.03)",
+          "oklch(95% 0.0096 129.03)"
+        ]
+      },
+      "pink-ink": {
+        "role": "neutral",
+        "displayName": "浅陶粉纸墨",
+        "tonalRamp": [
+          "oklch(15% 0.0170 27.72)",
+          "oklch(25% 0.0283 27.72)",
+          "oklch(35% 0.0396 27.72)",
+          "oklch(45% 0.0510 27.72)",
+          "oklch(58% 0.0510 27.72)",
+          "oklch(70% 0.0510 27.72)",
+          "oklch(83% 0.0347 27.72)",
+          "oklch(95% 0.0102 27.72)"
+        ]
+      },
+      "blue-ink": {
+        "role": "neutral",
+        "displayName": "雾水蓝纸墨",
+        "tonalRamp": [
+          "oklch(15% 0.0110 190.61)",
+          "oklch(25% 0.0184 190.61)",
+          "oklch(35% 0.0258 190.61)",
+          "oklch(45% 0.0331 190.61)",
+          "oklch(58% 0.0331 190.61)",
+          "oklch(70% 0.0331 190.61)",
+          "oklch(83% 0.0225 190.61)",
+          "oklch(95% 0.0066 190.61)"
+        ]
+      },
+      "yellow-tape": {
+        "role": "secondary",
+        "displayName": "麦芽胶带",
+        "tonalRamp": [
+          "oklch(15% 0.0231 91.81)",
+          "oklch(25% 0.0386 91.81)",
+          "oklch(35% 0.0540 91.81)",
+          "oklch(45% 0.0694 91.81)",
+          "oklch(58% 0.0694 91.81)",
+          "oklch(70% 0.0694 91.81)",
+          "oklch(83% 0.0472 91.81)",
+          "oklch(95% 0.0139 91.81)"
+        ]
+      },
+      "green-tape": {
+        "role": "secondary",
+        "displayName": "嫩叶胶带",
+        "tonalRamp": [
+          "oklch(15% 0.0174 123.30)",
+          "oklch(25% 0.0291 123.30)",
+          "oklch(35% 0.0407 123.30)",
+          "oklch(45% 0.0523 123.30)",
+          "oklch(58% 0.0523 123.30)",
+          "oklch(70% 0.0523 123.30)",
+          "oklch(83% 0.0356 123.30)",
+          "oklch(95% 0.0105 123.30)"
+        ]
+      },
+      "pink-tape": {
+        "role": "secondary",
+        "displayName": "浅陶胶带",
+        "tonalRamp": [
+          "oklch(15% 0.0122 37.35)",
+          "oklch(25% 0.0204 37.35)",
+          "oklch(35% 0.0286 37.35)",
+          "oklch(45% 0.0367 37.35)",
+          "oklch(58% 0.0367 37.35)",
+          "oklch(70% 0.0367 37.35)",
+          "oklch(83% 0.0250 37.35)",
+          "oklch(95% 0.0073 37.35)"
+        ]
+      },
+      "blue-tape": {
+        "role": "secondary",
+        "displayName": "雾水胶带",
+        "tonalRamp": [
+          "oklch(15% 0.0083 193.49)",
+          "oklch(25% 0.0138 193.49)",
+          "oklch(35% 0.0194 193.49)",
+          "oklch(45% 0.0249 193.49)",
+          "oklch(58% 0.0249 193.49)",
+          "oklch(70% 0.0249 193.49)",
+          "oklch(83% 0.0169 193.49)",
+          "oklch(95% 0.0050 193.49)"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "深麦焦点",
+        "tonalRamp": [
+          "oklch(15% 0.0301 77.72)",
+          "oklch(25% 0.0501 77.72)",
+          "oklch(35% 0.0701 77.72)",
+          "oklch(45% 0.0902 77.72)",
+          "oklch(58% 0.0902 77.72)",
+          "oklch(70% 0.0902 77.72)",
+          "oklch(83% 0.0613 77.72)",
+          "oklch(95% 0.0180 77.72)"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "砖红错误",
+        "tonalRamp": [
+          "oklch(15% 0.0444 28.81)",
+          "oklch(25% 0.0740 28.81)",
+          "oklch(35% 0.1036 28.81)",
+          "oklch(45% 0.1333 28.81)",
+          "oklch(58% 0.1333 28.81)",
+          "oklch(70% 0.1333 28.81)",
+          "oklch(83% 0.0906 28.81)",
+          "oklch(95% 0.0267 28.81)"
+        ]
+      },
+      "daylight-ink": {
+        "role": "neutral",
+        "displayName": "灰绿投影",
+        "tonalRamp": [
+          "oklch(15% 0.0124 135.25)",
+          "oklch(25% 0.0207 135.25)",
+          "oklch(35% 0.0290 135.25)",
+          "oklch(45% 0.0373 135.25)",
+          "oklch(58% 0.0373 135.25)",
+          "oklch(70% 0.0373 135.25)",
+          "oklch(83% 0.0253 135.25)",
+          "oklch(95% 0.0075 135.25)"
+        ]
+      },
+      "filter-neutral": {
+        "role": "neutral",
+        "displayName": "米色标签底",
+        "tonalRamp": [
+          "oklch(15% 0.0073 92.51)",
+          "oklch(25% 0.0121 92.51)",
+          "oklch(35% 0.0170 92.51)",
+          "oklch(45% 0.0218 92.51)",
+          "oklch(58% 0.0218 92.51)",
+          "oklch(70% 0.0218 92.51)",
+          "oklch(83% 0.0148 92.51)",
+          "oklch(95% 0.0044 92.51)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "空状态标题",
+        "purpose": "空状态的可见宋体标题；发布标题仅供辅助技术读取。"
+      },
+      "body": {
+        "displayName": "空状态说明",
+        "purpose": "空状态的无衬线说明文字。"
+      },
+      "note": {
+        "displayName": "纸笺正文",
+        "purpose": "旧 auto 记录的普通长度留言。"
+      },
+      "note-long": {
+        "displayName": "长纸笺正文",
+        "purpose": "旧 auto 记录中超过 180 个 Unicode 字符的留言。"
+      },
+      "control": {
+        "displayName": "主要控件",
+        "purpose": "主行动按钮。"
+      },
+      "label": {
+        "displayName": "标签",
+        "purpose": "分类与表单标签。"
+      },
+      "caption": {
+        "displayName": "辅助文字",
+        "purpose": "手机上的分类标签。"
+      },
+      "label-selected": {
+        "displayName": "选中分类",
+        "purpose": "原生单选分类当前项的 600 字重。"
+      },
+      "writing": {
+        "displayName": "定行书写",
+        "purpose": "新纸型与编辑器共用：基准 224px 有效宽度下 19px 字号，固定 36px 行高，随有效宽度缩小。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "paper",
+        "value": "2px 7px 13px -7px #6b624435, 0 2px 3px -2px #6b624424",
+        "purpose": "留言纸笺、加载纸张与发布纸笺。"
+      },
+      {
+        "name": "notice",
+        "value": "0 5px 24px -8px #34382c55",
+        "purpose": "新纸笺提示与发布成功反馈。"
+      },
+      {
+        "name": "floating-action",
+        "value": "0 6px 22px -8px #7d633765",
+        "purpose": "固定的「贴一张」按钮。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-transition",
+        "value": "background .18s ease, transform .18s ease",
+        "purpose": "主按钮悬停与按下反馈。"
+      },
+      {
+        "name": "unfold",
+        "value": "300ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "发布器从向下 12px、−1°、opacity .7 归位。"
+      },
+      {
+        "name": "breathe",
+        "value": "2s ease-in-out infinite",
+        "purpose": "加载纸张在中点使用 opacity .58；减少动态效果时关闭。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow",
+        "value": "370px"
+      },
+      {
+        "name": "mobile",
+        "value": "650px"
+      },
+      {
+        "name": "compact-paper",
+        "value": "800px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "浮动发布按钮",
+      "kind": "button",
+      "refersTo": "button-floating",
+      "description": "右下角固定的暖阳发布入口；桌面距下 30px，手机距下 20px。",
+      "html": "<button class=\"ds-primary\" type=\"button\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg>贴一张</button>",
+      "css": ".ds-primary{min-height:50px;padding:12px 23px;border:0;border-radius:12px;box-shadow:0 6px 22px -8px #7d633765;background:var(--button,#edc36f);color:#554323;display:inline-flex;gap:9px;align-items:center;justify-content:center;font:500 14px/1.6 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;cursor:pointer;transition:background .18s ease,transform .18s ease}.ds-primary:not(:disabled):hover{background:#e8b954;transform:translateY(-1px)}.ds-primary:active{transform:translateY(0)}.ds-primary:focus-visible{outline:2px solid #8a6629;outline-offset:5px;}.ds-primary:disabled{cursor:not-allowed;opacity:.52}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}@media(max-width:650px){.ds-primary{min-height:48px;padding:11px 19px;font-size:13px}}"
+    },
+    {
+      "name": "贴上墙",
+      "kind": "button",
+      "refersTo": "button-publish",
+      "description": "正在填写的纸笺右下角，36px 高的苔绿发布动作。",
+      "html": "<button class=\"ds-publish\" type=\"button\">贴上墙<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></button>",
+      "css": ".ds-publish{box-sizing:border-box;min-height:36px;padding:7px 12px;border:0;border-radius:8px;background:#626e4e;color:#fffef3;display:inline-flex;gap:9px;align-items:center;justify-content:center;font:500 12px/1.6 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;cursor:pointer;transition:background .18s ease,transform .18s ease}.ds-publish:not(:disabled):hover{background:#505e3d;transform:translateY(-1px)}.ds-publish:active{transform:translateY(0)}.ds-publish:focus-visible{outline:2px solid #8a6629;outline-offset:5px;}.ds-publish:disabled{cursor:not-allowed;opacity:.52}@media(prefers-reduced-motion:reduce){.ds-publish{transition:none}}"
+    },
+    {
+      "name": "重试加载",
+      "kind": "button",
+      "refersTo": "button-retry",
+      "description": "仅自动加载历史失败时出现，保留已有纸笺。",
+      "html": "<button class=\"ds-retry\" type=\"button\">重试加载<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 7v5h-5M4 17v-5h5 M6.1 6.1a8 8 0 0 1 13.3 3M4.6 14.9a8 8 0 0 0 13.3 3\"/></svg></button>",
+      "css": ".ds-retry{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#e9ebdc;color:var(--ink,#474b3e);border:0;border-radius:6px;padding:11px 19px;min-height:44px;font:400 13px/1.6 \"Noto Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;cursor:pointer}.ds-retry:hover{background:#dfe3ce}.ds-retry:focus-visible{outline:2px solid #8a6629;outline-offset:5px}"
+    },
+    {
+      "name": "纸笺署名",
+      "kind": "input",
+      "refersTo": "input-author",
+      "description": "纸笺左下角的 10px 可选署名，与真实便签落款对应。",
+      "html": "<div class=\"ds-author\"><label class=\"ds-sr-only\" for=\"ds-author-name\">署名（选填）</label><input id=\"ds-author-name\" placeholder=\"署名（选填）\" aria-describedby=\"ds-author-help\" /><span id=\"ds-author-help\" class=\"ds-sr-only\">最多 24 字；留空将匿名发布</span></div>",
+      "css": ".ds-author{display:flex;align-items:center;gap:6px;min-width:0;color:#6d5c2e;font:400 10px/1.6 \"Noto Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif}.ds-author::before{content:\"—\"}.ds-author input{box-sizing:border-box;width:100%;min-width:0;min-height:36px;padding:6px 0;border:0;border-radius:0;background:transparent;font:inherit;color:inherit}.ds-author input::placeholder{color:#6d5c2e;opacity:1}.ds-author input:focus-visible{outline:none;box-shadow:0 1px 0 #6d5c2e}.ds-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}"
+    },
+    {
+      "name": "留言输入",
+      "kind": "input",
+      "refersTo": "input-note",
+      "description": "方笺固定 9 行书写区：324px 高，宋体与 36px 行高，不可拉伸或内部滚动。",
+      "html": "<div class=\"ds-writing-paper\"><label class=\"ds-sr-only\" for=\"ds-note-text\">留言内容</label><textarea class=\"ds-note-input\" id=\"ds-note-text\" placeholder=\"把平凡的一天，也好好收藏。\"></textarea></div>",
+      "css": ".ds-writing-paper{box-sizing:border-box;width:280px;max-width:100%;padding:28px 28px 21px;background:var(--yellow,#f6e8af);border-radius:2px 3px 5px 2px}.ds-note-input{box-sizing:border-box;display:block;width:100%;height:324px;margin-top:20px;border:0;resize:none;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;background:transparent;padding:0;line-height:var(--writing-row,36px);font-family:\"Noto Serif SC\",\"Songti SC\",\"SimSun\",serif;font-size:19px;letter-spacing:.035em;border-radius:0;color:var(--ink,#474b3e)}.ds-note-input::placeholder{color:#6d5c2e;opacity:1}.ds-note-input:focus-visible{outline:none;box-shadow:0 1px 0 #6d5c2e}.ds-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}"
+    },
+    {
+      "name": "分类筛选",
+      "kind": "chip",
+      "refersTo": "filter-yellow",
+      "description": "原生单选；当前项用纸色、1.5px 描边、600 字重与勾号表达，未选项仅用米色小底，容器透明。",
+      "html": "<div class=\"ds-filters\" role=\"radiogroup\" aria-label=\"选择想看的留言分类\"><label class=\"ds-option ds-all-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-wall-category\" value=\"all\" checked /><span class=\"ds-filter ds-all\"><span class=\"ds-mark\"><span class=\"ds-check\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\"/></svg></span></span>全部看看</span></label><label class=\"ds-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-wall-category\" value=\"daily\" /><span class=\"ds-filter ds-daily\"><span class=\"ds-mark\"><span class=\"ds-check\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\"/></svg></span><span class=\"ds-dot\"></span></span>日常碎片</span></label><label class=\"ds-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-wall-category\" value=\"joy\" /><span class=\"ds-filter ds-joy\"><span class=\"ds-mark\"><span class=\"ds-check\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\"/></svg></span><span class=\"ds-dot\"></span></span>小小确幸</span></label><label class=\"ds-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-wall-category\" value=\"thoughts\" /><span class=\"ds-filter ds-thoughts\"><span class=\"ds-mark\"><span class=\"ds-check\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\"/></svg></span><span class=\"ds-dot\"></span></span>想说的话</span></label><label class=\"ds-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-wall-category\" value=\"wishes\" /><span class=\"ds-filter ds-wishes\"><span class=\"ds-mark\"><span class=\"ds-check\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\"/></svg></span><span class=\"ds-dot\"></span></span>许个心愿</span></label></div>",
+      "css": ".ds-filters{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-family:\"Noto Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif}.ds-option{position:relative;cursor:pointer}.ds-option>span{box-sizing:border-box;display:flex;align-items:center;gap:6px;min-height:36px;padding:5.5px 9.5px;border:1.5px solid transparent;font-size:12px;line-height:1.6;border-radius:6px;white-space:nowrap;transition:background .18s ease}.ds-option input:focus-visible+span{outline:2px solid #8a6629;outline-offset:5px}.ds-filter{background:#f4efdfeb}.ds-all{color:var(--muted,#606651)}.ds-daily{color:#6d5c2e}.ds-joy{color:#546245}.ds-thoughts{color:#75504b}.ds-wishes{color:#496563}.ds-option input:checked+span{border-color:currentColor;font-weight:600}.ds-option input:checked+.ds-all{background:#e2e8d5;color:#454d39}.ds-option input:checked+.ds-daily{background:#f2e7be}.ds-option input:checked+.ds-joy{background:#e2e8d5}.ds-option input:checked+.ds-thoughts{background:#efddd7}.ds-option input:checked+.ds-wishes{background:#dde8e7}.ds-option input:not(:checked)+.ds-filter:not(.ds-all):hover{text-decoration:underline;text-underline-offset:4px}.ds-mark{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:12px;height:14px}.ds-check{display:none}.ds-option input:checked+span .ds-check{display:inline-flex}.ds-option input:checked+span .ds-dot{display:none}.ds-dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0;background:currentColor;opacity:.8}@media(max-width:650px){.ds-filters{gap:6px}.ds-option>span{font-size:11px;padding:5.5px}.ds-all-option{width:100%;flex-basis:100%}.ds-all-option>span{width:max-content}}@media(prefers-reduced-motion:reduce){.ds-option>span{transition:none}}.ds-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}"
+    },
+    {
+      "name": "方笺",
+      "kind": "card",
+      "refersTo": "note-yellow",
+      "description": "新纸型默认方笺：占满网格列，正文至少 9 行、36px 行高，稳定转角与错位额外乘以 4/9。",
+      "html": "<article class=\"ds-note ds-sized\"><span class=\"ds-tape\" aria-hidden=\"true\"></span><span class=\"ds-note-category\"><span class=\"ds-note-dot\"></span>日常碎片</span><p class=\"ds-note-content\">把生活里的小小片刻，<br>轻轻贴在这里。</p><footer class=\"ds-note-footer\"><span>— 一位路过的人</span><time>10月28日 14:20</time></footer></article>",
+      "css": ".ds-note{--paper-width:91%;--paper-height:233px;--paper-drop:38px;--offset:-4px;--rotation:-0.35555555555555557deg;box-sizing:border-box;background:var(--yellow,#f6e8af);box-shadow:var(--paper-shadow,2px 7px 13px -7px #6b624435,0 2px 3px -2px #6b624424);padding:28px 28px 21px;width:var(--paper-width);min-height:var(--paper-height);margin-top:var(--paper-drop);justify-self:center;border-radius:2px 3px 5px 2px;position:relative;transform:translateX(var(--offset)) rotate(var(--rotation));color:var(--ink,#474b3e);display:flex;flex-direction:column;font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}.ds-tape{position:absolute;top:-10px;left:calc(50% - 26px);width:52px;height:21px;background:#ddcc99;opacity:.65;transform:rotate(-4deg)}.ds-note-category{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;color:#6d5c2e;font-size:10px;letter-spacing:.08em}.ds-note-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.8}.ds-note-content{white-space:pre-wrap;overflow-wrap:anywhere;font-family:\"Noto Serif SC\",\"Songti SC\",\"SimSun\",serif;font-size:19px;font-weight:400;line-height:1.9;margin:20px 0 30px;flex:1;letter-spacing:.035em}.ds-note-footer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;font-size:10px;color:#6d5c2e;line-height:1.7}.ds-note-footer time{font-size:9px;white-space:nowrap;font-variant-numeric:tabular-nums}@media(min-width:651px) and (max-width:800px){.ds-note{transform:translateX(calc(var(--offset) * .65)) rotate(calc(var(--rotation) * .65))}}@media(max-width:650px){.ds-note{width:calc((100% + var(--paper-width)) / 2);padding:28px 26px 23px;transform:translateX(calc(var(--offset) * .55)) rotate(calc(var(--rotation) * .65))}}.ds-note.ds-sized{width:100%;min-height:0;padding:28px 28px 21px}.ds-sized .ds-note-content{min-height:324px;font-size:19px;line-height:var(--writing-row,36px)}"
+    },
+    {
+      "name": "正在填写的纸笺",
+      "kind": "custom",
+      "refersTo": "composer-yellow",
+      "description": "280px 真实纸笺，纸外选择 6/9/12 行，默认方笺；矮屏原生滑动整张纸但不露额外滚动条，正文不内滚。",
+      "html": "<div class=\"ds-editor\"><div class=\"ds-paper-sizes\" role=\"radiogroup\" aria-label=\"便签纸尺寸\"><label class=\"ds-size-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-editor-paper-size\" value=\"small\" /><span>短笺<small>6 行</small></span></label><label class=\"ds-size-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-editor-paper-size\" value=\"medium\" checked /><span>方笺<small>9 行</small></span></label><label class=\"ds-size-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-editor-paper-size\" value=\"large\" /><span>长笺<small>12 行</small></span></label></div><form class=\"ds-composer\" aria-label=\"写一张便利贴\"><span class=\"ds-composer-tape\" aria-hidden=\"true\"></span><button class=\"ds-composer-close\" type=\"button\" aria-label=\"收起纸笺，保留草稿\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m6 6 12 12M6 18 18 6\"/></svg></button><label class=\"ds-composer-category\"><span class=\"ds-category-dot\"></span><select aria-label=\"留言分类\"><option>日常碎片</option><option>小小确幸</option><option>想说的话</option><option>许个心愿</option></select><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></label><label class=\"ds-sr-only\" for=\"ds-composer-text\">留言内容</label><textarea id=\"ds-composer-text\" aria-describedby=\"ds-composer-count\" placeholder=\"把平凡的一天，也好好收藏。\"></textarea><div class=\"ds-writing-bottom\"><span id=\"ds-composer-count\"><span class=\"ds-count-small\">0/6 行 · 0 字</span><span class=\"ds-count-medium\">0/9 行 · 0 字</span><span class=\"ds-count-large\">0/12 行 · 0 字</span></span></div><div class=\"ds-composer-actions\"><div class=\"ds-composer-author\"><label class=\"ds-sr-only\" for=\"ds-composer-author\">署名（选填）</label><input id=\"ds-composer-author\" placeholder=\"署名（选填）\" /></div><button class=\"ds-composer-publish\" type=\"button\">贴上墙<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></button></div></form></div>",
+      "css": ".ds-composer{box-sizing:border-box;width:100%;max-width:100%;background:var(--yellow,#f6e8af);box-shadow:var(--paper-shadow,2px 7px 13px -7px #6b624435,0 2px 3px -2px #6b624424);padding:28px 28px 21px;position:relative;border-radius:2px 3px 5px 2px;color:var(--ink,#474b3e);font-family:\"Noto Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;line-height:1.6;animation:ds-unfold .3s cubic-bezier(.16,1,.3,1)}.ds-composer-tape{position:absolute;top:-10px;left:calc(50% - 26px);width:52px;height:21px;background:#ddcc99;opacity:.65;transform:rotate(-4deg)}.ds-composer-close{position:absolute;top:16px;right:15px;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:inherit;cursor:pointer}.ds-composer-close:hover{background:#fff5}.ds-composer-close:focus-visible,.ds-composer-category select:focus-visible{outline:2px solid #8a6629;outline-offset:5px}.ds-composer-category{position:relative;display:inline-flex;align-items:center;gap:6px;color:#6d5c2e;font-size:10px;letter-spacing:.08em}.ds-category-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.8}.ds-composer-category select{appearance:none;font:inherit;letter-spacing:inherit;color:inherit;padding:6px 20px 6px 0;border:0;background:transparent;cursor:pointer}.ds-composer-category option{background:var(--yellow,#f6e8af)}.ds-composer-category>svg{position:absolute;right:0;pointer-events:none;transform:rotate(90deg)}.ds-composer textarea{box-sizing:border-box;display:block;width:100%;height:calc(var(--ds-writing-lines) * var(--writing-row,36px));margin-top:20px;border:0;resize:none;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;background:transparent;padding:0;line-height:var(--writing-row,36px);font-family:\"Noto Serif SC\",\"Songti SC\",\"SimSun\",serif;font-size:var(--writing-font,19px);letter-spacing:.035em;border-radius:0;color:inherit}.ds-composer textarea::placeholder,.ds-composer-author input::placeholder{color:#6d5c2e;opacity:1}.ds-composer textarea:focus-visible,.ds-composer-author input:focus-visible{outline:none;box-shadow:0 1px 0 #6d5c2e}.ds-writing-bottom{margin:8px 0 18px;display:flex;justify-content:flex-end;font-size:10px;color:#6d5c2e;font-variant-numeric:tabular-nums}.ds-composer-actions{display:flex;justify-content:space-between;align-items:center;gap:20px}.ds-composer-author{display:flex;align-items:center;gap:6px;flex:1;min-width:0;font-size:10px;color:#6d5c2e}.ds-composer-author::before{content:\"—\"}.ds-composer-author input{box-sizing:border-box;width:100%;min-width:0;min-height:36px;padding:6px 0;border:0;border-radius:0;background:transparent;font:inherit;color:inherit}.ds-composer-publish{flex-shrink:0;min-height:36px;padding:7px 12px;border:0;border-radius:8px;background:#626e4e;color:#fffef3;display:inline-flex;gap:9px;align-items:center;justify-content:center;font:500 12px/1.6 \"Noto Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;cursor:pointer;transition:background .18s ease,transform .18s ease}.ds-composer-publish:not(:disabled):hover{background:#505e3d;transform:translateY(-1px)}.ds-composer-publish:active{transform:translateY(0)}.ds-composer-publish:focus-visible{outline:2px solid #8a6629;outline-offset:5px}.ds-composer-publish:disabled{cursor:not-allowed;opacity:.52}@keyframes ds-unfold{from{transform:translateY(12px) rotate(-1deg);opacity:.7}to{transform:translateY(0) rotate(0);opacity:1}}@media(max-width:650px){.ds-composer{padding:28px 28px 21px}.ds-composer-actions{gap:12px}}@media(prefers-reduced-motion:reduce){.ds-composer{animation:none}.ds-composer-publish{transition:none}}.ds-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.ds-editor{box-sizing:border-box;max-height:calc(100dvh - 32px);overflow-x:hidden;overflow-y:auto;scrollbar-width:none;width:280px;max-width:100%;padding-top:12px;--ds-writing-lines:9;--writing-font:19px}.ds-editor:has(input[value=\"small\"]:checked){--ds-writing-lines:6}.ds-editor:has(input[value=\"large\"]:checked){--ds-writing-lines:12}.ds-count-small,.ds-count-large{display:none}.ds-editor:has(input[value=\"small\"]:checked) .ds-count-medium,.ds-editor:has(input[value=\"large\"]:checked) .ds-count-medium{display:none}.ds-editor:has(input[value=\"small\"]:checked) .ds-count-small,.ds-editor:has(input[value=\"large\"]:checked) .ds-count-large{display:inline}.ds-paper-sizes{display:flex;justify-content:space-between;gap:8px;margin-bottom:20px;font-family:\"Noto Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;color:var(--ink,#474b3e);line-height:1.6}.ds-size-option{position:relative;flex:1;cursor:pointer}.ds-size-option>span{box-sizing:border-box;display:flex;justify-content:center;align-items:center;gap:6px;min-height:36px;border:1px solid transparent;border-radius:6px;background:#f4efdf;font-size:12px}.ds-size-option small{font-size:10px;color:var(--muted,#606651)}.ds-size-option input:checked+span{border-color:#546245;background:#e2e8d5;font-weight:600}.ds-size-option input:focus-visible+span{outline:2px solid #8a6629;outline-offset:3px}.ds-size-option input:disabled+span{opacity:.52;cursor:not-allowed}.ds-editor::-webkit-scrollbar{display:none}"
+    },
+    {
+      "name": "纸型选择",
+      "kind": "chip",
+      "refersTo": "paper-size",
+      "description": "纸外三个原生单选小按钮，默认方笺，保留纸内分类与落款位置。",
+      "html": "<div class=\"ds-paper-sizes\" role=\"radiogroup\" aria-label=\"便签纸尺寸\"><label class=\"ds-size-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-paper-size\" value=\"small\" /><span>短笺<small>6 行</small></span></label><label class=\"ds-size-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-paper-size\" value=\"medium\" checked /><span>方笺<small>9 行</small></span></label><label class=\"ds-size-option\"><input class=\"ds-sr-only\" type=\"radio\" name=\"ds-paper-size\" value=\"large\" /><span>长笺<small>12 行</small></span></label></div>",
+      "css": ".ds-paper-sizes{display:flex;justify-content:space-between;gap:8px;margin-bottom:20px;font-family:\"Noto Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;color:var(--ink,#474b3e);line-height:1.6}.ds-size-option{position:relative;flex:1;cursor:pointer}.ds-size-option>span{box-sizing:border-box;display:flex;justify-content:center;align-items:center;gap:6px;min-height:36px;border:1px solid transparent;border-radius:6px;background:#f4efdf;font-size:12px}.ds-size-option small{font-size:10px;color:var(--muted,#606651)}.ds-size-option input:checked+span{border-color:#546245;background:#e2e8d5;font-weight:600}.ds-size-option input:focus-visible+span{outline:2px solid #8a6629;outline-offset:3px}.ds-size-option input:disabled+span{opacity:.52;cursor:not-allowed}.ds-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "午后窗边",
+    "overview": "暖米色纸纹墙面承接低饱和纸色，宽阔斜向阴影与疏散枝叶投影一起落在墙面和纸笺上，随向下阅读展开新的午后光线，橄榄棕墨色让中文保持安静而清晰。宋体标题、轻胶带与柔软纸影延续用户确认的「暖阳治愈系 · 自然简约 · 轻手作感」。舒适留白为文字留出停顿，页面直接从分类与留言开始。\n\n手作感来自稳定的偏转、错位、不同纸张尺寸和低对比真实纸纹。纸笺像随手贴上墙，仍按发布时间倒序阅读。控件保持清楚、直接；右下角「贴一张」展开可写的彩色纸笺，既延续材料，也保留常规表单的反馈。",
+    "keyCharacteristics": [
+      "真实纸纹、跨越墙面与纸笺的连续投影、四种低饱和纸色。",
+      "宋体表达情绪，无衬线承担操作与辅助说明。",
+      "轻胶带、小圆角、柔和纸影组成可复用的纸笺语言。",
+      "疏朗双列在手机收成单列，阅读次序保持稳定。",
+      "轻量动效与清楚焦点共同支持安静操作。"
+    ],
+    "rules": [
+      {
+        "name": "The Paper and Ink Rule",
+        "body": "纸色只负责材料与类别；正文保持主墨色，辅助说明使用已建立的深色墨，不通过降低文字透明度制造轻盈。",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "宋体留给纸笺标题与留言，无衬线负责控件和辅助信息；不引入第三种装饰性字体。",
+        "section": "typography"
+      },
+      {
+        "name": "The Fixed Lines Rule",
+        "body": "新纸型与编辑器共用 36px 行高和按有效宽度缩放的字号，所选行数决定书写容量；输入超量时保留旧稿，发布后的正文自然增高，不以裁字或内部滚动兜底。",
+        "section": "typography"
+      },
+      {
+        "name": "The Soft Paper Rule",
+        "body": "阴影表达纸张离墙的细微距离，保留柔边与扩散；不扩展为硬边偏移阴影。",
+        "section": "elevation"
+      },
+      {
+        "name": "The Stable Paper Rule",
+        "body": "纸笺姿态由 ID 的稳定混合散列决定：基础转角 −4° 至 4°、水平错位 −22px 至 22px。超过 80 字时转角与错位乘以 0.65，超过 180 字时乘以 0.4；换行超过 10 个时转角归零。新纸型的转角与错位再乘以 4 / 行数：短笺 2/3、方笺 4/9、长笺 1/3，避免高纸边角扫到邻列；旧 auto 保持原姿态。刷新和筛选不重抽姿态，随手张贴的外观始终服从时间倒序与正文可读性。",
+        "section": "elevation"
+      },
+      {
+        "name": "The Continuous Light Rule",
+        "body": "投影与纸笺处于同一文档平面，由原生滚动同步移动；不按纸笺单独装饰、不循环同一光影，也不随时间自行漂移。宽阔斜边保留大面积呼吸空间，分类、分页与发布操作保持在投影之上。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** 用低对比纸纹墙面、柔和窗影、四种纸色与深色墨建立层次。",
+      "**Do** 保留稳定的小幅倾斜、柔和纸影和轻胶带。",
+      "**Do** 让中文正文自然换行、自然长高，保留舒适行距。",
+      "**Do** 在手机保留完整发布、筛选和键盘焦点反馈。",
+      "**Do** 让图标延续同一组几何 SVG 与线条语言。"
+    ],
+    "donts": [
+      "**Don't** 用大圆角、强对比硬阴影或浓重纹理替代纸张材料。",
+      "**Don't** 用淡化辅助文字来营造轻盈，也不只凭颜色表达分类。",
+      "**Don't** 把界面扩成强调社交指标的高密度信息流。",
+      "**Don't** 用虚构评价、访客指标或未标注的演示留言制造可信度。",
+      "**Don't** 把每次刷新时的随机重新排布当作手作感。"
+    ]
+  }
+}
