@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
+	"sync"
 	"testing"
 	"time"
 
@@ -71,6 +73,9 @@ func TestPostgresPaginationFilteringAndPersistence(t *testing.T) {
 	if first.Total != 3 || len(first.Notes) != 1 || first.Notes[0].ID != "3" || first.Notes[0].PaperSize != "auto" || first.NextCursor == nil || first.HeadCursor == nil {
 		t.Fatalf("first page: %#v", first)
 	}
+	if first.Notes[0].Layout == nil || first.Notes[0].Layout.Width != 360 {
+		t.Fatal("legacy positions were not migrated")
+	}
 	before, err := decodeCursor(*first.NextCursor)
 	if err != nil {
 		t.Fatal(err)
@@ -114,5 +119,92 @@ func TestPostgresPaginationFilteringAndPersistence(t *testing.T) {
 	continued, err := s.List(ctx, categories, nil, 12)
 	if err != nil || continued.Total != 4 || continued.Notes[0].ID != "4" || continued.Notes[0].PaperSize != "large" {
 		t.Fatalf("reconnected persistence: %#v, %v", continued, err)
+	}
+}
+
+func TestConcurrentPlacementAndOwnershipPersistence(t *testing.T) {
+	dsn := os.Getenv("DATABASE_TEST_URL")
+	if dsn == "" {
+		t.Skip("set DATABASE_TEST_URL")
+	}
+	ctx := context.Background()
+	admin, err := pgxpool.New(ctx, dsn)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer admin.Close()
+	name := fmt.Sprintf("stickywall_space_%d", time.Now().UnixNano())
+	quoted := pgx.Identifier{name}.Sanitize()
+	if _, err = admin.Exec(ctx, "CREATE SCHEMA "+quoted); err != nil {
+		t.Fatal(err)
+	}
+	defer admin.Exec(ctx, "DROP SCHEMA "+quoted+" CASCADE")
+	config, err := pgxpool.ParseConfig(dsn)
+	if err != nil {
+		t.Fatal(err)
+	}
+	config.ConnConfig.RuntimeParams["search_path"] = name
+	pool, err := pgxpool.NewWithConfig(ctx, config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer pool.Close()
+	if _, err = pool.Exec(ctx, schema); err != nil {
+		t.Fatal(err)
+	}
+	s := &postgresStore{pool: pool}
+	input := newNote{Content: "并发位置测试", Category: "daily", Owner: "alice", Layout: testPaper(-160, -160)}
+	results := make(chan error, 2)
+	var wg sync.WaitGroup
+	for range 2 {
+		wg.Add(1)
+		go func() { defer wg.Done(); _, err := s.Create(ctx, input); results <- err }()
+	}
+	wg.Wait()
+	close(results)
+	success, conflicts := 0, 0
+	for err := range results {
+		if err == nil {
+			success++
+		} else {
+			var e *placementError
+			if errors.As(err, &e) {
+				conflicts++
+			} else {
+				t.Fatal(err)
+			}
+		}
+	}
+	if success != 1 || conflicts != 1 {
+		t.Fatalf("success=%d conflicts=%d", success, conflicts)
+	}
+	page, err := s.List(ctx, categories, nil, 50)
+	if err != nil || len(page.Notes) != 1 {
+		t.Fatalf("list: %#v %v", page, err)
+	}
+	root := page.Notes[0]
+	if root.Owner != "alice" || root.Layout.X != -160 {
+		t.Fatal("ownership or chosen position not persisted")
+	}
+	child := newNote{Content: "叠贴", Category: "daily", Owner: "bob", Layout: testPaper(-120, 0)}
+	child.Layout.ParentID = root.ID
+	if _, err = s.Create(ctx, child); err == nil {
+		t.Fatal("server accepted another owner's parent")
+	}
+	child.Owner = "alice"
+	saved, err := s.Create(ctx, child)
+	if err != nil {
+		t.Fatal(err)
+	}
+	page, err = s.List(ctx, categories, nil, 50)
+	if err != nil || len(page.Notes) != 2 || page.Notes[0].Layout.ParentID != root.ID || page.Notes[0].ID != saved.ID {
+		t.Fatalf("stack was not persisted: %#v %v", page, err)
+	}
+	if _, err = pool.Exec(ctx, schema); err != nil {
+		t.Fatal(err)
+	}
+	page, err = s.List(ctx, categories, nil, 50)
+	if err != nil || page.Notes[0].Layout.X != -120 || page.Notes[0].Layout.Y != 0 {
+		t.Fatal("migration moved an existing placement")
 	}
 }

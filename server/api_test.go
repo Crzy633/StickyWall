@@ -19,14 +19,50 @@ type fakeStore struct {
 }
 
 func (s *fakeStore) List(context.Context, []string, *cursor, int) (page, error) {
-	return page{Notes: []note{}}, nil
+	result := page{Notes: []note{}}
+	for _, input := range s.created {
+		result.Notes = append(result.Notes, note{ID: "1", Layout: input.Layout, Owner: input.Owner, Content: input.Content})
+	}
+	return result, nil
 }
 func (s *fakeStore) Create(_ context.Context, input newNote) (note, error) {
 	if s.fail {
 		return note{}, errors.New("database unavailable")
 	}
 	s.created = append(s.created, input)
-	return note{ID: "1", Content: input.Content, Category: input.Category, Author: input.Author, PaperSize: input.PaperSize, CreatedAt: time.Now()}, nil
+	return note{ID: "1", Content: input.Content, Category: input.Category, Author: input.Author, PaperSize: input.PaperSize, CreatedAt: time.Now(), Layout: input.Layout, Owner: input.Owner}, nil
+}
+
+func TestVisitorOwnershipIsPrivateAndPersistent(t *testing.T) {
+	store := &fakeStore{}
+	app := &application{store: store}
+	body := `{"layout":{"x":-160,"y":-160,"width":320,"height":320,"color":"yellow","kind":"note","texts":[],"strokes":[{"color":"#474b3e","width":3,"points":[[10,10],[20,20]]}]}}`
+	r := httptest.NewRequest("POST", "/api/notes", strings.NewReader(body))
+	r.Header.Set("Content-Type", "application/json")
+	w := httptest.NewRecorder()
+	app.ServeHTTP(w, r)
+	if w.Code != 201 {
+		t.Fatal(w.Body.String())
+	}
+	cookies := w.Result().Cookies()
+	if len(cookies) != 1 || !cookies[0].HttpOnly || cookies[0].SameSite != http.SameSiteStrictMode || cookies[0].MaxAge <= 0 {
+		t.Fatal("missing secure persistent identity cookie")
+	}
+	if strings.Contains(w.Body.String(), store.created[0].Owner) || strings.Contains(w.Body.String(), cookies[0].Value) {
+		t.Fatal("ownership secret leaked")
+	}
+	for _, mine := range []bool{true, false} {
+		r = httptest.NewRequest("GET", "/api/notes", nil)
+		if mine {
+			r.AddCookie(cookies[0])
+		}
+		w = httptest.NewRecorder()
+		app.ServeHTTP(w, r)
+		var result page
+		if err := json.Unmarshal(w.Body.Bytes(), &result); err != nil || len(result.Notes) != 1 || result.Notes[0].Mine != mine {
+			t.Fatalf("mine=%v, response=%s", mine, w.Body.String())
+		}
+	}
 }
 func (s *fakeStore) Updates(context.Context, []string, *cursor) (int64, error) { return 0, nil }
 func (s *fakeStore) Ping(context.Context) error {
@@ -50,7 +86,7 @@ func TestCreateNoteValidation(t *testing.T) {
 		{"unknown property", `{"content":"hello","category":"daily","id":"99"}`, 400},
 		{"two objects", `{"content":"hello","category":"daily"}{}`, 400},
 		{"invalid JSON", `{"content":`, 400},
-		{"oversized", `{"content":"` + strings.Repeat("x", 9000) + `","category":"daily"}`, 413},
+		{"oversized", `{"content":"` + strings.Repeat("x", 6*1024*1024) + `","category":"daily"}`, 413},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

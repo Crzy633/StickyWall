@@ -3,14 +3,25 @@ export const SHADOW_TILE_HEIGHT = 1280;
 export const SHADOW_BLEED = 32;
 const SHADOW_REACH = 1800;
 
-export function visibleShadowBands(scrollTop: number, viewportHeight: number) {
-  const first = Math.max(0, Math.floor((scrollTop - SHADOW_REACH) / SHADOW_BAND_HEIGHT));
-  const last = Math.floor((scrollTop + viewportHeight + SHADOW_REACH) / SHADOW_BAND_HEIGHT);
+export function visibleShadowBands(start: number, length: number) {
+  const first = Math.floor((start - SHADOW_REACH) / SHADOW_BAND_HEIGHT);
+  const last = Math.floor((start + length + SHADOW_REACH) / SHADOW_BAND_HEIGHT);
   return Array.from({ length: last - first + 1 }, (_, index) => first + index);
 }
 
-export function shadowBand(index: number) {
-  let state = (Math.imul(index + 1, 0x9e3779b1) ^ 0x41c6ce57) || 1;
+export function visibleShadowTiles(view: { x: number; y: number; width: number; height: number }) {
+  const left = Math.floor(view.x / SHADOW_TILE_HEIGHT) - 1;
+  const right = Math.floor((view.x + view.width) / SHADOW_TILE_HEIGHT) + 1;
+  const top = Math.floor(view.y / SHADOW_TILE_HEIGHT) - 1;
+  const bottom = Math.floor((view.y + view.height) / SHADOW_TILE_HEIGHT) + 1;
+  const columns = right - left + 1, count = columns * (bottom - top + 1);
+  // At distant overview scales the fine shadow detail is omitted rather than allocating unbounded canvases.
+  if (count > 144) return [];
+  return Array.from({ length: count }, (_, i) => ({ column: left + i % columns, row: top + Math.floor(i / columns) }));
+}
+
+export function shadowBand(index: number, column = 0) {
+  let state = (Math.imul(index + 1, 0x9e3779b1) ^ Math.imul(column, 0x85ebca6b) ^ 0x41c6ce57) || 1;
   const random = () => {
     state ^= state << 13;
     state ^= state >>> 17;

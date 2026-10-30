@@ -12,8 +12,77 @@ export const paperSizes = [
   { id: 'large', label: '长笺', lines: 12 },
 ] as const;
 export type PaperSize = typeof paperSizes[number]['id'];
-export type Note = { id: string; content: string; author: string; category: Category; paperSize?: PaperSize | 'auto'; createdAt: string };
+export type Ink = { color: string; width: number; points: [number, number][] };
+export type TextBlock = { x: number; y: number; width: number; size: number; color: string; text: string };
+export type Layout = { x: number; y: number; width: number; height: number; color: 'yellow' | 'green' | 'pink' | 'blue'; kind: 'note' | 'photo'; parentId?: string; image?: string; texts: TextBlock[]; strokes: Ink[] };
+export type Note = { id: string; content: string; author: string; category: Category; paperSize?: PaperSize | 'auto'; createdAt: string; layout: Layout; mine: boolean };
 export type NotesPage = { notes: Note[]; nextCursor: string | null; headCursor: string | null; total: number };
+
+export function compareNotes(a: Note, b: Note) {
+  return Date.parse(a.createdAt) - Date.parse(b.createdAt) || (BigInt(a.id) < BigInt(b.id) ? -1 : BigInt(a.id) > BigInt(b.id) ? 1 : 0);
+}
+
+export function gap(a: Layout, b: Layout) {
+  return Math.hypot(Math.max(0, a.x - b.x - b.width, b.x - a.x - a.width), Math.max(0, a.y - b.y - b.height, b.y - a.y - a.height));
+}
+export function overlaps(a: Layout, b: Layout) { return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y; }
+export function ancestors(layout: Layout, notes: Note[]) {
+  const result = new Set<string>(); let id = layout.parentId;
+  while (id && !result.has(id)) { result.add(id); id = notes.find(n => n.id === id)?.layout.parentId; }
+  return result;
+}
+export function placementError(p: Layout, notes: Note[]) {
+  if (!notes.length) return p.parentId || p.kind === 'photo' || Math.hypot(p.x + p.width / 2, p.y + p.height / 2) > 100 ? '把纸张中心放进圆圈里' : '';
+  const ignored = ancestors(p, notes);
+  if (p.parentId) {
+    const n = notes.find(n => n.id === p.parentId);
+    if (!n?.mine || n.layout.kind === 'photo') return '只能贴在自己的便签上';
+    const q = n.layout;
+    if (!overlaps(p, q) || (p.kind !== 'photo' && (p.y < q.y + q.height / 2 || p.y >= q.y + q.height)) || (p.x <= q.x && p.y <= q.y && p.x + p.width >= q.x + q.width && p.y + p.height >= q.y + q.height)) return '从原便签的下半部贴起，留出原便签';
+  } else if (p.kind === 'photo') return '先选一张自己的便签';
+  let connected = !!p.parentId;
+  for (const n of notes) {
+    if (ignored.has(n.id)) continue;
+    const d = gap(p, n.layout);
+    if (overlaps(p, n.layout) || d < 16) return '离其它便签太近了，留一点空隙';
+    if (d <= Math.min(p.width, p.height, n.layout.width, n.layout.height) / 2) connected = true;
+  }
+  return connected ? '' : '离大家太远了，最多隔半张便签';
+}
+export type Camera = { x: number; y: number; zoom: number };
+export function edgePanVelocity(point: { x: number; y: number }, viewport: { width: number; height: number }) {
+  const maxSpeed = 1200;
+  const axis = (position: number, size: number) => {
+    const zone = Math.min(96, size / 4);
+    if (zone <= 0) return 0;
+    if (position < zone) return -maxSpeed * Math.min(1, (zone - position) / zone) ** 2;
+    if (position > size - zone) return maxSpeed * Math.min(1, (position - size + zone) / zone) ** 2;
+    return 0;
+  };
+  const x = axis(point.x, viewport.width), y = axis(point.y, viewport.height);
+  const scale = Math.min(1, maxSpeed / Math.hypot(x, y));
+  return { x: x * scale, y: y * scale };
+}
+export function wallBounds(notes: Note[]) {
+  if (!notes.length) return { left: -240, top: -240, right: 240, bottom: 240 };
+  return notes.reduce((b, { layout: p }) => ({ left: Math.min(b.left, p.x), top: Math.min(b.top, p.y), right: Math.max(b.right, p.x + p.width), bottom: Math.max(b.bottom, p.y + p.height) }), { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity });
+}
+export function clampCamera(c: Camera, notes: Note[], viewport: { width: number; height: number }): Camera {
+  const b = wallBounds(notes);
+  const padding = 1000;
+  const axis = (v: number, low: number, high: number, size: number) => {
+    const lo = low - padding + size / (2 * c.zoom), hi = high + padding - size / (2 * c.zoom);
+    return lo > hi ? (low + high) / 2 : Math.max(lo, Math.min(hi, v));
+  };
+  const result = { ...c, x: axis(c.x, b.left, b.right, viewport.width), y: axis(c.y, b.top, b.bottom, viewport.height) };
+  const halfW = viewport.width / (2 * c.zoom), halfH = viewport.height / (2 * c.zoom);
+  if (notes.length && !notes.some(({ layout: p }) => p.x + p.width + padding > result.x - halfW && p.x - padding < result.x + halfW && p.y + p.height + padding > result.y - halfH && p.y - padding < result.y + halfH)) {
+    const nearest = notes.reduce((best, n) => Math.hypot(n.layout.x + n.layout.width / 2 - result.x, n.layout.y + n.layout.height / 2 - result.y) < Math.hypot(best.layout.x + best.layout.width / 2 - result.x, best.layout.y + best.layout.height / 2 - result.y) ? n : best).layout;
+    result.x = axis(result.x, nearest.x, nearest.x + nearest.width, viewport.width);
+    result.y = axis(result.y, nearest.y, nearest.y + nearest.height, viewport.height);
+  }
+  return result;
+}
 
 export function paperPosition(id: string, content = '') {
   let hash = 2166136261;

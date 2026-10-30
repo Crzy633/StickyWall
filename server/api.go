@@ -2,6 +2,9 @@ package main
 
 import (
 	"context"
+	"crypto/rand"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"io"
@@ -33,6 +36,12 @@ func (a *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Cache-Control", "no-store")
+	identity, err := visitor(w, r)
+	if err != nil {
+		writeError(w, 503, "暂时无法识别访客，请重试")
+		return
+	}
+	r = r.WithContext(context.WithValue(r.Context(), visitorKey{}, identity))
 	ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
 	defer cancel()
 	r = r.WithContext(ctx)
@@ -99,6 +108,9 @@ func (a *application) listNotes(w http.ResponseWriter, r *http.Request) {
 		storageError(w, err)
 		return
 	}
+	for i := range result.Notes {
+		result.Notes[i].Mine = result.Notes[i].Owner != "" && result.Notes[i].Owner == r.Context().Value(visitorKey{})
+	}
 	writeJSON(w, http.StatusOK, result)
 }
 
@@ -108,7 +120,7 @@ func (a *application) createNote(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusUnsupportedMediaType, "请使用 JSON 格式提交留言")
 		return
 	}
-	r.Body = http.MaxBytesReader(w, r.Body, 8*1024)
+	r.Body = http.MaxBytesReader(w, r.Body, 6*1024*1024)
 	decoder := json.NewDecoder(r.Body)
 	decoder.DisallowUnknownFields()
 	var input newNote
@@ -129,6 +141,7 @@ func (a *application) createNote(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	input.Owner, _ = r.Context().Value(visitorKey{}).(string)
 	ip, _, err := net.SplitHostPort(r.RemoteAddr)
 	if err != nil {
 		ip = r.RemoteAddr
@@ -140,10 +153,38 @@ func (a *application) createNote(w http.ResponseWriter, r *http.Request) {
 	}
 	result, err := a.store.Create(r.Context(), input)
 	if err != nil {
+		var conflict *placementError
+		if errors.As(err, &conflict) {
+			writeError(w, http.StatusConflict, conflict.Error())
+			return
+		}
 		storageError(w, err)
 		return
 	}
+	result.Mine = true
 	writeJSON(w, http.StatusCreated, result)
+}
+
+type visitorKey struct{}
+
+func visitor(w http.ResponseWriter, r *http.Request) (string, error) {
+	c, err := r.Cookie("wall_visitor")
+	token := ""
+	if err == nil && len(c.Value) == 64 {
+		if _, err = hex.DecodeString(c.Value); err == nil {
+			token = c.Value
+		}
+	}
+	if token == "" {
+		b := make([]byte, 32)
+		if _, err = rand.Read(b); err != nil {
+			return "", err
+		}
+		token = hex.EncodeToString(b)
+		http.SetCookie(w, &http.Cookie{Name: "wall_visitor", Value: token, Path: "/", HttpOnly: true, SameSite: http.SameSiteStrictMode, Secure: r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https", MaxAge: 34560000})
+	}
+	hash := sha256.Sum256([]byte(token))
+	return hex.EncodeToString(hash[:]), nil
 }
 
 func (a *application) updates(w http.ResponseWriter, r *http.Request) {

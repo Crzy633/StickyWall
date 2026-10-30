@@ -66,7 +66,7 @@ func (s *postgresStore) List(ctx context.Context, selected []string, before *cur
 		value := encodeCursor(head)
 		result.HeadCursor = &value
 	}
-	query := "SELECT id::text, content, category, author, paper_size, created_at FROM notes WHERE category = ANY($1::text[])"
+	query := "SELECT id::text, content, category, author, paper_size, created_at, layout, owner_hash FROM notes WHERE category = ANY($1::text[])"
 	args := []any{selected}
 	if before != nil {
 		query += " AND (created_at, id) < ($2, $3::bigint)"
@@ -82,7 +82,7 @@ func (s *postgresStore) List(ctx context.Context, selected []string, before *cur
 	}
 	for rows.Next() {
 		var item note
-		if err := rows.Scan(&item.ID, &item.Content, &item.Category, &item.Author, &item.PaperSize, &item.CreatedAt); err != nil {
+		if err := rows.Scan(&item.ID, &item.Content, &item.Category, &item.Author, &item.PaperSize, &item.CreatedAt, &item.Layout, &item.Owner); err != nil {
 			rows.Close()
 			return result, err
 		}
@@ -103,12 +103,61 @@ func (s *postgresStore) List(ctx context.Context, selected []string, before *cur
 
 func (s *postgresStore) Create(ctx context.Context, input newNote) (note, error) {
 	var result note
+	tx, err := s.pool.Begin(ctx)
+	if err != nil {
+		return result, err
+	}
+	defer tx.Rollback(ctx)
+	// Serialize placement checks with inserts so simultaneous visitors cannot claim the same space.
+	if _, err = tx.Exec(ctx, "SELECT pg_advisory_xact_lock(73190421)"); err != nil {
+		return result, err
+	}
+	rows, err := tx.Query(ctx, "SELECT id::text, layout, owner_hash FROM notes ORDER BY id")
+	if err != nil {
+		return result, err
+	}
+	existing := []note{}
+	for rows.Next() {
+		var n note
+		if err = rows.Scan(&n.ID, &n.Layout, &n.Owner); err != nil {
+			rows.Close()
+			return result, err
+		}
+		existing = append(existing, n)
+	}
+	err = rows.Err()
+	rows.Close()
+	if err != nil {
+		return result, err
+	}
+	if input.Layout == nil {
+		// Compatibility for older clients; current clients always choose coordinates themselves.
+		input.Layout = &placement{X: -160, Y: -160, Width: 320, Height: 320, Color: "yellow", Kind: "note"}
+		if len(existing) > 0 {
+			right := existing[0].Layout
+			for _, n := range existing {
+				if n.Layout.X+n.Layout.Width > right.X+right.Width {
+					right = n.Layout
+				}
+			}
+			input.Layout.X = right.X + right.Width + 40
+			input.Layout.Y = right.Y
+		}
+	}
+	if err = checkPlacement(input.Layout, existing, input.Owner); err != nil {
+		return result, &placementError{err}
+	}
 	if input.PaperSize == "" {
 		input.PaperSize = "auto"
 	}
-	err := s.pool.QueryRow(ctx, "INSERT INTO notes (content, category, author, paper_size) VALUES ($1, $2, $3, $4) RETURNING id::text, content, category, author, paper_size, created_at", input.Content, input.Category, input.Author, input.PaperSize).Scan(&result.ID, &result.Content, &result.Category, &result.Author, &result.PaperSize, &result.CreatedAt)
-	return result, err
+	err = tx.QueryRow(ctx, "INSERT INTO notes (content, category, author, paper_size, layout, owner_hash) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id::text, content, category, author, paper_size, created_at, layout, owner_hash", input.Content, input.Category, input.Author, input.PaperSize, input.Layout, input.Owner).Scan(&result.ID, &result.Content, &result.Category, &result.Author, &result.PaperSize, &result.CreatedAt, &result.Layout, &result.Owner)
+	if err != nil {
+		return result, err
+	}
+	return result, tx.Commit(ctx)
 }
+
+type placementError struct{ error }
 
 func (s *postgresStore) Updates(ctx context.Context, selected []string, after *cursor) (int64, error) {
 	query := "SELECT count(*) FROM notes WHERE category = ANY($1::text[])"
